@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Gallery Art Exhibitions</title>
+    <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.157.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-gamepad-controls@0.1.0/dist/aframe-gamepad-controls.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/n5ro/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+</head>
+<body>
+    <a-scene physics="debug: true">
+        <!-- Preload Textures -->
+        <a-assets>
+            <img id="floorTexture" src="assets/texture/floor.jpg" />
+            <img id="wallTexture" src="assets/texture/wall.jpg" />
+            <img id="ceilingTexture" src="assets/texture/ceiling.jpg" />
+            <img id="art1" src="assets/images/cafe.jpg" />
+            <img id="art2" src="assets/images/starry-night.jpg" />
+            <img id="art3" src="assets/images/church.jpg" />
+            <img id="art4" src="assets/images/angel.jpg" />
+            <img id="art5" src="assets/images/bali.jpg" />
+            <img id="art6" src="assets/images/boat.jpg" />
+            <img id="art7" src="assets/images/boreas.jpg" />
+            <img id="art8" src="assets/images/boy.jpg" />
+            <img id="art9" src="assets/images/flower.jpg" />
+            <img id="art10" src="assets/images/canal.jpg" />
+            <img id="art11" src="assets/images/child.jpg" />
+            <img id="art12" src="assets/images/girl.jpg" />
+        </a-assets>
+
+        <!-- Floor -->
+        <a-plane position="0 0 0" rotation="-90 0 0" width="20" height="20" src="#floorTexture" repeat="5 5" static-body>
+        </a-plane>
+        <a-plane position="0 7 0" rotation="90 0 0" width="20" height="20" src="#ceilingTexture" repeat="5 5" static-body>
+        </a-plane>
+
+        <!-- Walls -->
+        <a-box position="0 2 -10" width="20" height="10" depth="0.1" src="#wallTexture" repeat="5 2" static-body>
+        </a-box>
+        <a-box position="-10 2 0" width="0.1" height="10" depth="20" src="#wallTexture" repeat="5 2" static-body>
+        </a-box>
+        <a-box position="10 2 0" width="0.1" height="10" depth="20" src="#wallTexture" repeat="5 2" static-body>
+        </a-box>
+        <a-box position="0 2 10" width="20" height="10" depth="0.1" src="#wallTexture" repeat="5 2" static-body>
+        </a-box>
+
+        <!-- Ambient Lighting -->
+        <a-light type="ambient" color="#ffdcb2" intensity="0.3">
+        </a-light>
+
+        <!-- Spotlights on Art -->
+        <a-light type="spot" color="#ffcc66" intensity="1.5" position="-5 3.9 -7" target="#art1" angle="30" penumbra="0.5" castShadow="true">
+        </a-light>
+        <a-light type="spot" color="#ffcc66" intensity="1.5" position="0 3.9 -7" target="#art2" angle="30" penumbra="0.5" castShadow="true">
+        </a-light>
+        <a-light type="spot" color="#ffcc66" intensity="1.5" position="5 3.9 -7" target="#art3" angle="30" penumbra="0.5" castShadow="true">
+        </a-light>
+        <a-light type="spot" color="#ffcc66" intensity="1.5" position="-7 3.9 -5.2" rotation="0 90 0" target="#art4" angle="30" penumbra="0.5" castShadow="true">
+        </a-light>
+        <a-light type="spot" color="#ffcc66" intensity="1.5" position="-7 3.9 0" rotation="0 90 0" target="#art5" angle="30" penumbra="0.5" castShadow="true">
+        </a-light>
+        <a-light type="spot" color="#ffcc66" intensity="1.5" position="-7 3.9 5" rotation="0 90 0" target="#art6" angle="30" penumbra="0.5" castShadow="true">
+        </a-light>
+        <a-light type="spot" color="#ffcc66" intensity="1.5" position="7 3.9 -5" rotation="0 270 0" target="#art7" angle="30" penumbra="0.5" castShadow="true">
+        </a-light>
+        <a-light type="spot" color="#ffcc66" intensity="1.5" position="7 3.9 0" rotation="0 270 0" target="#art8" angle="30" penumbra="0.5" castShadow="true">
+        </a-light>
+        <a-light type="spot" color="#ffcc66" intensity="1.5" position="7 3.9 5" rotation="0 270 0" target="#art9" angle="30" penumbra="0.5" castShadow="true">
+        </a-light>
+        <a-light type="spot" color="#ffcc66" intensity="1.5" position="5 3.9 7" rotation="0 180 0" target="#art10" angle="30" penumbra="0.5" castShadow="true">
+        </a-light>
+        <a-light type="spot" color="#ffcc66" intensity="1.5" position="0 3.9 7" rotation="0 180 0" target="#art11" angle="30" penumbra="0.5" castShadow="true">
+        </a-light>
+        <a-light type="spot" color="#ffcc66" intensity="1.5" position="-5 3.9 7" rotation="0 180 0" target="#art12" angle="30" penumbra="0.5" castShadow="true">
+        </a-light>
+
+        <!-- Subtle Ceiling Light -->
+        <a-light type="point" color="#ffe6cc" intensity="0.5" position="0 6 0">
+        </a-light>
+
+        <!-- Art Pieces -->
+         <a-entity id="art-pieces">
+          <a-box class="clickable" details="Cafe Art: A cozy scene of a cafe by Vincent van Gogh" 
+              position="-5 4 -9.9" width="3.2" height="3.2" depth="0.2" color="#3b3b3b" dynamic-body>
+              <a-plane src="#art1" position="0 0 0.11" width="3" height="3" material="shader: standard; roughness: 1"></a-plane>
+              <a-entity class="art-info" position="0 -2 0" text="value: Cafe Art: A cozy scene of a cafe by Vincent van Goghcolor: white; width: 4; align: center" visible="false"></a-entity>
+          </a-box>
+          <a-box class="clickable" details="Starry Night: A masterpiece by Vincent van Gogh" 
+              position="0 4 -9.9" width="3.2" height="3.2" depth="0.2" color="#3b3b3b" dynamic-body>
+              <a-plane src="#art2" position="0 0 0.11" width="3" height="3" material="shader: standard; roughness: 1"></a-plane>
+              <a-entity class="art-info" position="0 -2 0" text="value: Starry Night: A masterpiece by Vincent van Gogh; color: white; width: 4; align: center" visible="false"></a-entity>
+          </a-box>
+          <a-box class="clickable" details="Church Art: A depiction of serenity by Vincent van Gogh" 
+              position="5 4 -9.9" width="3.2" height="3.2" depth="0.2" color="#3b3b3b" dynamic-body>
+              <a-plane src="#art3" position="0 0 0.11" width="3" height="3" material="shader: standard; roughness: 1"></a-plane>
+              <a-entity class="art-info" position="0 -2 0" text="value: Starry Night: A masterpiece by Vincent van Gogh; color: white; width: 4; align: center" visible="false"></a-entity>
+          </a-box>
+  
+          <!-- Left Wall Art -->
+          <a-box class="clickable" details="The Lament for Icarus: A painting by Herbert James Draper" position="-9.8 4 -5" width="3.2" height="3.2" depth="0.2" rotation="0 90 0" color="#3b3b3b" static-body>
+              <a-plane src="#art4" position="0 0 0.11" width="3" height="3" material="shader: standard; roughness: 1"></a-plane>
+              <a-entity class="art-info" position="0 -2 0" text="The Lament for Icarus: A painting by Herbert James Draper; color: white; width: 4; align: center" visible="false"></a-entity>
+          </a-box>
+          <a-box class="clickable" details="Balinese Procession: By maestro Lee Man Fong" position="-9.8 4 0" width="3.2" height="3.2" depth="0.2" rotation="0 90 0" color="#3b3b3b" static-body>
+              <a-plane src="#art5" position="0 0 0.11" width="3" height="3" material="shader: standard; roughness: 1"></a-plane>
+              <a-entity class="art-info" position="0 -2 0" text="Balinese Procession: By maestro Lee Man Fong; color: white; width: 4; align: center" visible="false"></a-entity>
+          </a-box>
+          <a-box class="clickable" details="The Blue Boat: A tranquil masterpiece by Winslow Homer" position="-9.8 4 5" width="3.2" height="3.2" depth="0.2" rotation="0 90 0" color="#3b3b3b" static-body>
+              <a-plane src="#art6" position="0 0 0.11" width="3" height="3" material="shader: standard; roughness: 1"></a-plane>
+              <a-entity class="art-info" position="0 -2 0" text="The Blue Boat: A tranquil masterpiece by Winslow Homer; color: white; width: 4; align: center" visible="false"></a-entity>
+          </a-box>
+  
+          <!-- Right Wall Art -->
+          <a-box class="clickable" details="Boreas: A captivating oil paintng by John William Waterhouse" position="9.8 4 -5" width="3.2" height="3.2" depth="0.2" rotation="0 270 0" color="#3b3b3b" static-body>
+              <a-plane src="#art7" position="0 0 0.11" width="3" height="3" material="shader: standard; roughness: 1"></a-plane>
+              <a-entity class="art-info" position="0 -2 0" text="Boreas: A captivating oil paintng by John William Waterhouse; color: white; width: 4; align: center" visible="false"></a-entity>
+          </a-box>
+          <a-box class="clickable" details="The Reverend Robert Walker Skating on Duddingston Loch: A timeless potrait by Henry Raeburn" position="9.8 4 0" width="3.2" height="3.2" depth="0.2" rotation="0 270 0" color="#3b3b3b" static-body>
+              <a-plane src="#art8" position="0 0 0.11" width="3" height="3" material="shader: standard; roughness: 1"></a-plane>
+              <a-entity class="art-info" position="0 -2 0" text="The Reverend Robert Walker Skating on Duddingston Loch: A timeless potrait by Henry Raeburn; color: white; width: 4; align: center" visible="false"></a-entity>
+          </a-box>
+          <a-box class="clickable" details="Roses and Jasmine in a Delft Vase: A floral masterpiece by Pierre-Auguste Renoir" position="9.8 4 5" width="3.2" height="3.2" depth="0.2" rotation="0 270 0" color="#3b3b3b" static-body>
+              <a-plane src="#art9" position="0 0 0.11" width="3" height="3" material="shader: standard; roughness: 1"></a-plane>
+              <a-entity class="art-info" position="0 -2 0" text="Roses and Jasmine in a Delft Vase: A floral masterpiece by Pierre-Auguste Renoir; color: white; width: 4; align: center" visible="false"></a-entity>
+          </a-box>
+  
+          <!-- Behind Wall Art -->
+          <a-box class="clickable" details="The Entrance to the Grand Canal: A majestic cityscape by Canaletto" 
+          position="-5 4 9.9" width="3.2" height="3.2" depth="0.2" rotation="0 180 0" color="#3b3b3b" static-body>
+            <a-plane src="#art10" position="0 0 0.11" width="3" height="3" material="shader: standard; roughness: 1"></a-plane>
+            <a-entity class="art-info" position="0 -2 0" text="The Entrance to the Grand Canal: A majestic cityscape by Canaletto; color: white; width: 4; align: center" visible="false"></a-entity>
+          </a-box>
+          <a-box class="clickable" details="The Return of the Prodigal Son: A poignant masterpiece by Rembrandt van Rijn" 
+              position="0 4 9.9" width="3.2" height="3.2" depth="0.2" rotation="0 180 0" color="#3b3b3b" static-body>
+              <a-plane src="#art11" position="0 0 0.11" width="3" height="3" material="shader: standard; roughness: 1"></a-plane>
+              <a-entity class="art-info" position="0 -2 0" text="The Return of the Prodigal Son: A poignant masterpiece by Rembrandt van Rijn; color: white; width: 4; align: center" visible="false"></a-entity>
+          </a-box>
+          <a-box class="clickable" details="Girl with a Pearl Earring: A captivating portrait by Johannes Vermeer" 
+              position="5 4 9.9" width="3.2" height="3.2" depth="0.2" rotation="0 180 0" color="#3b3b3b" static-body>
+              <a-plane src="#art12" position="0 0 0.11" width="3" height="3" material="shader: standard; roughness: 1"></a-plane>
+              <a-entity class="art-info" position="0 -2 0" text="Girl with a Pearl Earring: A captivating portrait by Johannes Vermeer; color: white; width: 4; align: center" visible="false"></a-entity>
+          </a-box>
+        </a-entity>
+
+        <!-- Player Rig for Movement -->
+        <a-entity id="cameraRig" position="0 1.6 5" dynamic-body movement-controls="speed: 0.02" gamepad-controls="fly: true; speed: 0.02">
+          <a-camera position="0 0 0" wasd-controls look-controls>
+              <a-cursor color="red" fuse="true"></a-cursor>
+          </a-camera>
+          <a-sphere radius="0.5" color="blue" position="0 0 0" visible="false" geometry="primitive: sphere" static-body></a-sphere>
+
+          <!-- VR Controllers -->
+          <a-entity oculus-touch-controls="hand: left" class="controller" controller-movement></a-entity>
+          <a-entity oculus-touch-controls="hand: right" class="controller"></a-entity> 
+        </a-entity>
+       
+    </a-scene>
+
+    <script src="script.js"></script>
+</body>
+</html>
