@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+
+    <a-scene>
+
+        <a-assets>
+            <a-assets-item id="gbk" src="scene gltf/scene.gltf"></a-assets-item>
+        </a-assets>
+
+        <a-entity gltf-model="#gbk" rotation="-90 0 0" position="0 -2d 0" shadow="receive: true"></a-entity>
+
+        <a-entity light="type: ambient; color: #000; intensity: 0.2"></a-entity>
+        <a-entity light="type: directional; color: #FFFF00; intensity: 0.6; castShadow: true"
+                  position="10 1 0"
+                  animation="property: light.intensity; from: 0.3; to: 0; loop: true; dir: alternate; dur: 3000">
+        </a-entity>
+        <a-entity light="type: point; color: #0000FF; intensity: 0.3; distance: 100; castShadow: true"
+                  position="1a 1 0"
+                  animation="property: light.intensity; from: 0.3; to: 0; loop: true; dir: alternate; dur: 3000"s>
+        </a-entity>
+        <a-entity light="type: spot; target: #box; color: #AA0000; angle: 30; penumbra: 0.1; castShadow: true"
+        position="1a 1 0"></a-entity>
+
+        <a-box id="box" color="blue"
+               position="-1 0.7 -1"
+               animation="property: position; to: -1 0.7 1; loop: true; dur: 2000; dir: alternate; easing: easeInQuad"
+               shadow="cast: true">
+        </a-box>
+
+        <a-sphere scale="0.5 0.5 0.5" position="0 1 0" shadow="cast= true"
+        animation="property: material.color; from: #FF00FF; to: #0570FF; dir: alternate; loop: true"
+        animation__2="property: position; to: 0 0 0; loop: true; dur: 2000; dir: alternate; easing: easeInQuad">
+        </a-sphere>
+
+        <a-camera position="0 1 5"></a-camera>
+
+    </a-scene>
+
+    
+</body>
+</html>
